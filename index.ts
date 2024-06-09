@@ -1,12 +1,6 @@
-// Number Types mini-challenge 10 10.2
-// Write a function that will only accept numbers and attend to 
-// all TypeScript weakness flags.
-// : number
-
-const propertyContainer = document.querySelector('.properties')
-
+//  Enum Types
 import { showReviewTotal, populateUser } from './utils'
-
+const propertyContainer = document.querySelector('.properties')
 let isOpen : boolean 
 
 // Reviews
@@ -37,21 +31,43 @@ const reviews : {
     
 ]
 // User
-const you: {
-    firstName: string;
-    lastName: string;
-    isReturning: boolean;
-    age: number;
-    stayedAt: string[];
-} = {
+// const you: {
+//     firstName: string;
+//     lastName: string;
+//     isReturning: boolean;
+//     age: number;
+//     stayedAt: string[];
+// } = {
+//     firstName: 'Bobby',
+//     lastName: 'Brown',
+//     isReturning: true,
+//     age: 35,
+//     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
+// }
+
+const ADMIN = 'admin'
+const READ_ONLY = 'read-only'
+
+
+enum Permissions {
+    ADMIN,
+    READ_ONLY
+}
+
+const you = {
     firstName: 'Bobby',
     lastName: 'Brown',
+    permissions: Permissions.ADMIN,
     isReturning: true,
     age: 35,
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-//Properties
+if (you.permissions === 'admin') {
+    //show
+}
+
+//Array of Properties
 const properties : {
     image: string;
     title: string;
@@ -62,11 +78,11 @@ const properties : {
         code: number;
         country: string;
     };
-    contact: string;
+    contact: [number, string];
     isAvailabe: boolean;
 }[] = [
     {
-        image: '',
+        image: 'images/colombia-property.jpg',
         title: 'Colombian Shack',
         price: 45,
         location: {
@@ -75,12 +91,12 @@ const properties : {
             code: 45632,
             country: 'Colombia'
         },
-        contact: 'marywinkle@gmail.com',
+        contact: [ +1123495082908,'marywinkle@gmail.com'],
         isAvailable: true
         
     },
     {
-        image: '',
+        image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
         price: 34,
         location: {
@@ -89,13 +105,13 @@ const properties : {
             code: 343903,
             country: 'Poland'
         },
-        contact: 'garydavis@hotmail.com',
+        contact: [+1123495082908, 'garydavis@hotmail.com'],
         isAvailable: false
 
     },
 
     {
-        image: '',
+        image: 'images/london-property.jpg',
         title: 'London Flat',
         price: 23,
         location: {
@@ -104,7 +120,7 @@ const properties : {
             code: 35433,
             country: 'United Kingdom'
         },
-        contact: 'andyluger@aol.com',
+        contact: [ +1123495082908, 'andyluger@aol.com'],
         isAvailable: true
 
     }
@@ -126,3 +142,11 @@ for (let i = 0; i < properties.length; i++) {
     card.appendChild(image)
     propertyContainer?.appendChild(card)
 }
+
+// Location, current time and temperature
+// Location
+let currentLocation: [string, string, number] = ['Rustenburg', '16:59', 18 ]
+footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
+
+
+
