@@ -2,14 +2,14 @@
 import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from './utils'
 // import { Price, Country } from './types'
 import "../index.css";
-import { Permissions, LoyaltyUser } from './enums'
-import { Review, Property } from './interfaces'
-import MainProperty from './classes' 
-const propertyContainer = document.querySelector('.properties')
-const reviewContainer = document.querySelector('.reviews')
-const container = document.querySelector('.container')
-const button = document.querySelector('button')
-const footer = document.querySelector('.footer')
+import { Permissions, LoyaltyUser } from './enums';
+import { Review, Property } from './interfaces';
+import MainProperty from './classes'; 
+const propertyContainer = document.querySelector('.properties') as HTMLElement
+const reviewContainer = document.querySelector('.reviews') as HTMLElement
+const container = document.querySelector('.container') as HTMLElement
+const button = document.querySelector('button') as HTMLElement
+const footer = document.querySelector('.footer') as HTMLElement
 
 let isLoggedIn : boolean 
 
@@ -66,7 +66,7 @@ const properties : Property[] = [
     {
         image: 'images/poland-property.jpg',
         title: 'Polish Cottage',
-        price: 34,
+        price: 30,
         location: {
             firstLine: 'no 23',
             city: 'Gdansk',
@@ -81,7 +81,7 @@ const properties : Property[] = [
     {
         image: 'images/london-property.jpg',
         title: 'London Flat',
-        price: 23,
+        price: 25,
         location: {
             firstLine: 'flat 15',
             city: 'London',
@@ -148,18 +148,6 @@ button.addEventListener('click', () => addReviews(reviews))
 let currentLocation : [string, string, number] = ['Rustenburg', '16:59', 18 ]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
-// Classes
-class MainProperty {
-    src: string
-    title: string
-    reviews: Review[]
-    constructor(src: string, title: string, reviews: Review[]) {
-        this.src = src
-        this.title = title
-        this.reviews = reviews
-    }
-}
-
 let yourMainProperty = new MainProperty(
     'images/italian-property.jpg', 
     'Italian House',
@@ -170,7 +158,7 @@ let yourMainProperty = new MainProperty(
         date: '12-04-2021'
     }] )
 
-const mainImageContainer = document.querySelector('.main-image')
+const mainImageContainer = document.querySelector('.main-image') as HTMLElement
 const image = document.createElement('img')
 image.setAttribute('src', yourMainProperty.src)
 mainImageContainer.appendChild(image)
