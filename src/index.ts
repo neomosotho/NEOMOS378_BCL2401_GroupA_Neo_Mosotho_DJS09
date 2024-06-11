@@ -1,8 +1,9 @@
 //  Enum Types
-import { showReviewTotal, populateUser, showDetails } from './utils'
-import { Price, Country } from './types'
+import { showReviewTotal, populateUser, showDetails, getTopTwoReviews } from './utils'
+// import { Price, Country } from './types'
 import "../index.css";
-// import { Permissions, LoyaltyUser } from './enums'
+import { Permissions, LoyaltyUser } from './enums'
+import { Review, Property } from './interfaces'
 const propertyContainer = document.querySelector('.properties')
 const reviewContainer = document.querySelector('.reviews')
 const container = document.querySelector('.container')
@@ -10,17 +11,6 @@ const button = document.querySelector('button')
 const footer = document.querySelector('.footer')
 
 let isLoggedIn : boolean 
-
-enum Permissions {
-    ADMIN = 'ADMIN', 
-    READ_ONLY = 'READ_ONLY'
-}
-
-enum LoyaltyUser {
-    GOLD_USER = 'GOLD_USER',
-    SILVER_USER = 'SILVER_USER',
-    BRONZE_USER = 'BRONZE_USER'
-}
 
 // Reviews
 const reviews : Review[] = [
@@ -57,19 +47,7 @@ const you = {
 }
 
 //Array of Properties
-const properties : {
-    image: string;
-    title: string;
-    price: number;
-    location: {
-        firstLine: string;
-        city: string;
-        code: number;
-        country: string;
-    };
-    contact: [number, string];
-    isAvailabe: boolean;
-}[] = [
+const properties : Property[] = [
     {
         image: 'images/colombia-property.jpg',
         title: 'Colombian Shack',
@@ -112,6 +90,20 @@ const properties : {
         contact: [+34829374892553, 'andyluger@aol.com'],
         isAvailable: true
 
+    },
+
+    {
+        image: 'images/malaysian-hotel.jpeg',
+        title: 'Malia Hotel',
+        price: 35,
+        location: {
+            firstLine: 'Room 4',
+            city: 'Malia',
+            code: 45334,
+            country: 'Malaysia'
+        },
+        contact: [ +60349822083, 'lee34@gmail.com'],
+        isAvailable: false
     }
 ]
 
@@ -133,7 +125,6 @@ for (let i = 0; i < properties.length; i++) {
     propertyContainer?.appendChild(card)
 }
 
-//Broken code
 let count = 0
 function addReviews(array: Review[]) : void {
     if (!count ) {
@@ -156,6 +147,31 @@ button.addEventListener('click', () => addReviews(reviews))
 let currentLocation : [string, string, number] = ['Rustenburg', '16:59', 18 ]
 footer.innerHTML = currentLocation[0] + ' ' + currentLocation[1] + ' ' + currentLocation[2] + '°'
 
+// Classes
+class MainProperty {
+    src: string
+    title: string
+    reviews: Review[]
+    constructor(src: string, title: string, reviews: Review[]) {
+        this.src = src
+        this.title = title
+        this.reviews = reviews
+    }
+}
 
+let yourMainProperty = new MainProperty(
+    'images/italian-property.jpg', 
+    'Italian House',
+    [{
+        name: 'Olive',
+        stars: 5,
+        loyaltyUser: LoyaltyUser.GOLD_USER,
+        date: '12-04-2021'
+    }] )
+
+const mainImageContainer = document.querySelector('.main-image')
+const image = document.createElement('img')
+image.setAttribute('src', yourMainProperty.src)
+mainImageContainer.appendChild(image)
 
 
