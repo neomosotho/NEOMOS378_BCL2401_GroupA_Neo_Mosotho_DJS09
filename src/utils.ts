@@ -30,6 +30,23 @@ export function makeMultiple(value: number) {
     } else return ''
 }
 
+// Broken code
+export function getTopTwoReviews(reviews: {
+    name: string;
+    stars: number;
+    loyalyuser: LoyaltyUser;
+    date: string;
+}[]) : {
+    name: string;
+    stars: number;
+    loyalyuser: LoyaltyUser;
+    date: string;  
+}[]  {
+ const sortedReviews = reviews.sort((a, b) => b.stars - a.stars)
+ return sortedReviews.slice(0,2)
+}
+
+
 // function add(firstValue, secondValue) {
 //     let result
 //     if (typeof firstValue === 'number' && typeof secondValue === 'number') {
